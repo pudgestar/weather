@@ -75,9 +75,6 @@ dependencies {
     kapt libs.moshi.codegen
     
     testImplementation libs.junit
-    androidTestImplementation libs.test.ext
-    androidTestImplementation libs.espresso.core
-    androidTestImplementation libs.ui.test.junit
     debugImplementation libs.compose.ui.tooling
     debugImplementation libs.ui.test.manifest
 }
