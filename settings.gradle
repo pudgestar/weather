@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "Weather"
 include ':app'
 include ':features:search:ui'
+include ':features:search:domain'
+include ':features:search:data'
+include ':common:design'

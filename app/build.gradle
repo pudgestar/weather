@@ -1,6 +1,8 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    alias libs.plugins.android.application
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.hilt.plugin
+    alias libs.plugins.kotlin.kapt
 }
 
 android {
@@ -36,7 +38,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion "1.3.0"
     }
     packagingOptions {
         resources {
@@ -48,11 +50,26 @@ android {
 dependencies {
 
     implementation libs.kotlin
-    implementation libs.compose.ui
-    implementation libs.compose.material
-    implementation libs.compose.ui.tooling.preview
+    implementation libs.bundles.compose
+    implementation libs.compose.navigation
     implementation libs.lifecycle.runtime.ktx
-    implementation libs.activity.compose
+    implementation libs.coroutines
+
+    implementation libs.android.hilt
+    implementation libs.android.hilt.compose
+    kapt libs.android.hilt.compiler
+
+    implementation libs.retrofit
+    implementation libs.retrofit.moshi
+    implementation libs.okhttp.interceptor
+
+    implementation(project(":features:search:ui"))
+    implementation(project(":features:search:data"))
+    implementation(project(":features:search:domain"))
+
+    implementation libs.moshi
+    implementation libs.moshi.kotlin
+    kapt libs.moshi.codegen
     
     testImplementation libs.junit
     androidTestImplementation libs.test.ext
