@@ -2,6 +2,7 @@ package io.duron.weather.search.ui
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,15 +16,22 @@ class WeatherDetailViewModel @Inject constructor(
     private val _detailState = MutableStateFlow<WeatherDetailState>(WeatherDetailState.Default)
     val detailState: StateFlow<WeatherDetailState> = _detailState
 
-    fun setCityAndIndex(city: String, index: Int) {
-        val point = weatherRepository.getHourlyInfo(city, index)
+    lateinit var router: Router
+
+    fun setCityAndTime(city: String, dateId: String) {
+        val point = weatherRepository.getHourlyInfo(city, dateId)
         _detailState.value = WeatherDetailState.DetailContent(
             temp = point.main.temp.toInt().toString(),
             feelsLike = point.main.feels_like.toInt().toString(),
             summaryTitle = point.weather.first().main,
             summaryBody = point.weather.first().description,
-            time = point.date.toString("mm/dd HH:mm")
+            time = point.date.toString("MM/dd HH:mm"),
+            title = city
         )
+    }
+
+    fun goBack() {
+        router.goBack()
     }
 
 }
@@ -32,6 +40,7 @@ class WeatherDetailViewModel @Inject constructor(
 sealed class WeatherDetailState {
     object Default: WeatherDetailState()
     data class DetailContent(
+        val title: String,
         val temp: String,
         val feelsLike: String,
         val time: String,

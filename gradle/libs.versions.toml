@@ -17,7 +17,7 @@ retrofit = "2.9.0"
 moshi = "1.13.0"
 moshikotlin = "1.13.0"
 jodatime = "2.11.0"
-
+composesystemui = "0.26.1-alpha"
 
 hilt = "2.42"
 
@@ -38,6 +38,9 @@ compose_material = { module = "androidx.compose.material:material", version.ref 
 compose_ui_tooling_preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose_activity = { module = 'androidx.activity:activity-compose', version.ref = "composeactivity" }
 compose_navigation = { module = "androidx.navigation:navigation-compose", version.ref="composenavigation"}
+compose_system_ui = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "composesystemui"}
+compose_icons = { module = 'androidx.compose.material:material-icons-core', version.ref = "compose"}
+
 
 lifecycle_runtime_ktx = { module = 'androidx.lifecycle:lifecycle-runtime-ktx', version.ref = "lifecycle" }
 
@@ -65,6 +68,7 @@ moshi_kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "mosh
 joda_time = { module = 'joda-time:joda-time', version.ref = "jodatime"}
 
 
+
 [bundles]
-compose = ["compose_activity", "compose_material", "compose-ui", "compose_ui_tooling_preview"]
+compose = ["compose_activity", "compose_material", "compose-ui", "compose_ui_tooling_preview", "compose_system_ui", "compose_icons"]
 

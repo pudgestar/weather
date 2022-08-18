@@ -1,4 +1,4 @@
-package io.duron.weather.ui.theme
+package io.duron.weather.design.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

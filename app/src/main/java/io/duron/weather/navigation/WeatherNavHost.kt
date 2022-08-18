@@ -28,11 +28,12 @@ fun WeatherNavHost(navController: NavHostController) {
             WeatherListScreen(viewModel = viewModel)
         }
 
-        composable("weather/{city}/{index}") {
+        composable("weather/{city}/{dateId}") {
             val city = it.arguments?.getString("city") ?: throw IllegalArgumentException("No city passed")
-            val index = it.arguments?.getString("index")?.toInt() ?: throw IllegalArgumentException("No index passed")
+            val dateId = it.arguments?.getString("dateId") ?: throw IllegalArgumentException("No index passed")
             val viewModel = hiltViewModel<WeatherDetailViewModel>()
-            viewModel.setCityAndIndex(city, index)
+            viewModel.router = router
+            viewModel.setCityAndTime(city, dateId)
             WeatherDetailScreen(viewModel = viewModel)
 
         }

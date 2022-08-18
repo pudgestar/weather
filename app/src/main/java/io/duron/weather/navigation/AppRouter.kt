@@ -12,7 +12,11 @@ class AppRouter(
         navHostController.navigate("weather/$city")
     }
 
-    override fun navigateToDetail(city: String, index: Int) {
-        navHostController.navigate("weather/$city/$index")
+    override fun navigateToDetail(city: String, dateId: String) {
+        navHostController.navigate("weather/$city/$dateId")
+    }
+
+    override fun goBack() {
+        navHostController.navigateUp()
     }
 }

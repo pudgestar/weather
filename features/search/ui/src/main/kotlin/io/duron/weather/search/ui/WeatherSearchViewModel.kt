@@ -7,18 +7,19 @@ import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherSearchViewModel @Inject constructor(
     private val searchRepository: WeatherRepository
-): ViewModel() {
+) : ViewModel() {
 
     lateinit var router: Router
 
     private val _loadingState = MutableStateFlow(false)
     private val _textState = MutableStateFlow("")
-    private val _errorState = MutableStateFlow("")
+    private val _errorState = MutableStateFlow<String?>(null)
     private val _screenState = MutableStateFlow(WeatherInput())
 
     val screenState: StateFlow<WeatherInput> = _screenState
@@ -34,11 +35,26 @@ class WeatherSearchViewModel @Inject constructor(
     }
 
     fun onLookupTapped(text: String) {
+        val city = text.trim()
+        if (city.isEmpty() || city.isBlank()) {
+            _errorState.value = "Invalid city input"
+            return
+        }
+        _errorState.value = null
+        fetchCityWeather(city)
+    }
+
+    private fun fetchCityWeather(city: String) {
         _loadingState.value = true
         viewModelScope.launch {
-            searchRepository.getWeatherForCity(text.trim())
+            try {
+                searchRepository.getWeatherForCity(city.trim())
+                navigateToWeatherList(city)
+            } catch (e: Exception) {
+                _errorState.value = "Error fetching city"
+            }
             _loadingState.value = false
-            navigateToWeatherList(text)
+
         }
     }
 

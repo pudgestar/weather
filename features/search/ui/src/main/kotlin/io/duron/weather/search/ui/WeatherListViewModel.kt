@@ -19,23 +19,27 @@ class WeatherListViewModel @Inject constructor(
     private lateinit var city: String
     lateinit var router: Router
 
-    private val _screenState = MutableStateFlow<WeatherListState>(WeatherListState(emptyList()))
+    private val _screenState = MutableStateFlow<WeatherListState>(WeatherListState(rows = emptyList()))
     val screenState: StateFlow<WeatherListState> = _screenState
 
     fun setQuery(city: String) {
         this.city = city
         viewModelScope.launch {
             val response = weatherRepository.getWeatherForCity(city)
-            _screenState.emit(WeatherListState(response.toPointRows()))
+            _screenState.emit(WeatherListState(title = city, rows = response.toPointRows()))
         }
     }
 
-    fun onRowTapped(index: Int) {
-        router.navigateToDetail(city, index)
+    fun onRowTapped(dateId: String) {
+        router.navigateToDetail(city, dateId)
+    }
+
+    fun goBack() {
+        router.goBack()
     }
 
 
 }
 
-data class WeatherListState(val rows: List<WeatherUiRow>)
+data class WeatherListState(val title: String = "", val rows: List<WeatherUiRow>)
 

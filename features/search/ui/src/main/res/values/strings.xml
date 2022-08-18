@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feels_like">Feels Like: </string>
+    <string name="farenheit_temp">%s&#8457;</string>
+    <string name="time">Time: %s</string>
+</resources>

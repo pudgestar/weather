@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "io.duron.weather"
         minSdk 22
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -68,6 +68,7 @@ dependencies {
     implementation(project(":features:search:domain"))
 
     implementation(project(":common:router"))
+    implementation(project(":common:design"))
 
     implementation libs.moshi
     implementation libs.moshi.kotlin

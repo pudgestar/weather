@@ -1,6 +1,9 @@
-package io.duron.weather.ui.theme
+package io.duron.weather.design.theme
 
 import androidx.compose.ui.graphics.Color
+
+val LightGreen = Color(0xFFAED581)
+val DarkGreen = Color(0xFF7DA453)
 
 val Purple200 = Color(0xFFBB86FC)
 val Purple500 = Color(0xFF6200EE)

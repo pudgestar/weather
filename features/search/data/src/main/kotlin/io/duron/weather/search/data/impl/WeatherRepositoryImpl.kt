@@ -8,17 +8,18 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
     private val weatherService: WeatherService
-): WeatherRepository {
+) : WeatherRepository {
 
     private val cache = mutableMapOf<String, WeatherResponse>()
 
     override suspend fun getWeatherForCity(city: String): WeatherResponse {
-        return if(cache.containsKey(city)) {
+        return if (cache.containsKey(city)) {
             cache.getValue(city)
         } else {
             weatherService.getForecastForCity(city).also { cache[city] = it }
         }
     }
 
-    override fun getHourlyInfo(city: String, index: Int) = cache.getValue(city).list[index]
+    override fun getHourlyInfo(city: String, dateId: String) =
+        cache.getValue(city).list.first { it.dt_txt == dateId }
 }
