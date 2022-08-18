@@ -18,6 +18,7 @@ class DataModule {
     fun provideWeatherService(retrofit: Retrofit): WeatherService = retrofit.create(WeatherService::class.java)
 
     @Provides
+    @Singleton
     fun provideWeatherRepository(impl: WeatherRepositoryImpl): WeatherRepository = impl
 
 }

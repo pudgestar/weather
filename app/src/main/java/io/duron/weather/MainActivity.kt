@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import io.duron.weather.navigation.WeatherNavHost
 import io.duron.weather.search.ui.WeatherSearchViewModel
 import io.duron.weather.search.ui.WeatherSearchScreen
 import io.duron.weather.ui.theme.WeatherTheme
@@ -27,12 +28,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun WeatherNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "cityInput" ) {
-        composable("cityInput") {
-            val viewModel = hiltViewModel<WeatherSearchViewModel>()
-            WeatherSearchScreen(viewModel = viewModel)
-        }
-    }
-}

@@ -67,6 +67,8 @@ dependencies {
     implementation(project(":features:search:data"))
     implementation(project(":features:search:domain"))
 
+    implementation(project(":common:router"))
+
     implementation libs.moshi
     implementation libs.moshi.kotlin
     kapt libs.moshi.codegen

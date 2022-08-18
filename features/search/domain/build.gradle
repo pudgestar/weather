@@ -44,6 +44,8 @@ dependencies {
     implementation libs.android.hilt.compose
     kapt libs.android.hilt.compiler
 
+    implementation libs.joda.time
+
     implementation libs.moshi
     implementation libs.moshi.kotlin
     kapt libs.moshi.codegen

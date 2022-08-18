@@ -6,18 +6,6 @@ import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.joda.time.format.DateTimeFormat
 
-sealed class WeatherScreenState {
-    data class WeatherInput(
-        val error: String? = null,
-        val loading: Boolean = false,
-        val text: String = "",
-        val onTextUpdated: (String) -> Unit
-    ) : WeatherScreenState()
-
-    data class WeatherList(val rows: List<WeatherUiRow>) : WeatherScreenState()
-    class WeatherDetail() : WeatherScreenState()
-}
-
 
 
 sealed class WeatherUiRow {
@@ -32,13 +20,12 @@ sealed class WeatherUiRow {
 
 fun WeatherResponse.toPointRows(): List<WeatherUiRow> {
     val pointRows =  this.list.map {
-        val date = LocalDateTime.parse(it.dt_txt, DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss"))
 
         WeatherUiRow.WeatherPointRow(
             summary = it.weather.first().main,
-            temp = "${it.main.temp}",
-            time = date.toString("HH:mm"),
-            date = date
+            temp = "${it.main.temp.toInt()}",
+            time = it.date.toString("HH:mm"),
+            date = it.date
         )
     }
 

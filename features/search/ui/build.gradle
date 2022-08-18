@@ -37,6 +37,7 @@ dependencies {
 
     implementation(project(":features:search:data"))
     implementation(project(":features:search:domain"))
+    implementation(project(":common:router"))
 
     testImplementation libs.junit
     debugImplementation libs.compose.ui.tooling
