@@ -1,32 +1,10 @@
 plugins {
-    alias libs.plugins.android.library
-    alias libs.plugins.kotlin.android
-}
-
-android {
-
-    compileSdk 33
-
-    defaultConfig {
-        minSdk 22
-        targetSdk 33
-
-        vectorDrawables {
-            useSupportLibrary true
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+    id "java-library"
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 
-dependencies {
-
-    implementation libs.kotlin
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }

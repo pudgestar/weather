@@ -36,7 +36,9 @@ hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 
 [libraries]
-kotlin = {module = 'androidx.core:core-ktx', version.ref = "kotlincore"}
+kotlin_android = {module = 'androidx.core:core-ktx', version.ref = "kotlincore"}
+kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin" }
+
 compose_ui = { module = "androidx.compose.ui:ui", version.ref = "compose"}
 compose_material = { module = "androidx.compose.material:material", version.ref = "compose"}
 compose_ui_tooling_preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }

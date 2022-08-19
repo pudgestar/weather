@@ -27,7 +27,7 @@ fun WeatherSearchScreen(viewModel: WeatherSearchViewModel) {
             OutlinedTextField(
                 value = input.text,
                 onValueChange = { value -> viewModel.onTextUpdated(value)},
-                placeholder = { Text("City Name") },
+                placeholder = { Text(stringResource(R.string.city_name)) },
                 isError = input.error != null,
                 colors = TextFieldDefaults.textFieldColors(textColor = MaterialTheme.colors.onBackground),
             )
@@ -35,7 +35,7 @@ fun WeatherSearchScreen(viewModel: WeatherSearchViewModel) {
                 Text(stringResource(input.error), color = Color.Red)
             }
             OutlinedButton(onClick = { viewModel.onLookupTapped(input.text) }, enabled = !input.loading) {
-                Text("Lookup")
+                Text(stringResource(R.string.lookup))
             }
         }
 

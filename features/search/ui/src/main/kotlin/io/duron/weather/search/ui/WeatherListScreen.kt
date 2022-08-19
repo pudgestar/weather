@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 
@@ -24,23 +25,9 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun WeatherListScreen(viewModel: WeatherListViewModel) {
     val state = viewModel.screenState.collectAsState().value
-    val navController = rememberNavController()
     Scaffold(
         backgroundColor = MaterialTheme.colors.background,
-        topBar = {
-            TopAppBar(
-                title = { Text(state.title) },
-                navigationIcon = {
-                    IconButton(onClick = { viewModel.goBack() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                },
-                backgroundColor = MaterialTheme.colors.primary
-            )
-        }
+        topBar = { SimpleAppBar(title = state.title, onBack = viewModel::goBack) }
     ) {
 
         WeatherSchedule(state = state, onRowTapped = { viewModel.onRowTapped(it) })

@@ -49,7 +49,7 @@ android {
 
 dependencies {
 
-    implementation libs.kotlin
+    implementation libs.kotlin.android
     implementation libs.bundles.compose
     implementation libs.compose.navigation
     implementation libs.lifecycle.runtime.ktx

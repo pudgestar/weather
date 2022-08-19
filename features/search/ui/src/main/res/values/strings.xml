@@ -5,4 +5,7 @@
     <string name="time">Time: %s</string>
     <string name="error_city_input">Invalid city input</string>
     <string name="error_fetching_city">Error fetching city</string>
+    <string name="back">Back</string>
+    <string name="city_name">City Name</string>
+    <string name="lookup">Lookup</string>
 </resources>

@@ -20,20 +20,8 @@ fun WeatherDetailScreen(viewModel: WeatherDetailViewModel) {
     val title = (state as? WeatherDetailState.DetailContent)?.title ?: ""
     Scaffold(
         backgroundColor = MaterialTheme.colors.background,
-        topBar = {
-            TopAppBar(
-                title = { Text(title) },
-                navigationIcon = {
-                    IconButton(onClick = { viewModel.goBack() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
-                },
-                backgroundColor = MaterialTheme.colors.primary
-            )
-        }) {
+        topBar = { SimpleAppBar(title = title, onBack = viewModel::goBack) }
+    ) {
         if (state is WeatherDetailState.DetailContent) {
             WeatherDetailContent(content = state)
         }

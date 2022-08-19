@@ -30,7 +30,7 @@ android {
 
 dependencies {
 
-    implementation libs.kotlin
+    implementation libs.kotlin.android
 
     implementation libs.coroutines
     implementation project(":features:search:domain")
