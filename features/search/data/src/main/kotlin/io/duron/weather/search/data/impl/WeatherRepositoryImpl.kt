@@ -14,6 +14,10 @@ class WeatherRepositoryImpl @Inject constructor(
 
     private val cache = mutableMapOf<String, WeatherResponse>()
 
+    /**
+     * query the weather by city, if weather for that city has been cached
+     * then return that cached value
+     */
     override suspend fun getWeatherForCity(city: String): RepositoryResult<WeatherResponse> {
         return if (cache.containsKey(city)) {
             RepositoryResult.Success(cache.getValue(city))
@@ -28,8 +32,14 @@ class WeatherRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * returns hourly weather info by city
+     */
     override fun getHourlyInfo(city: String, dateId: String) =
         cache.getValue(city).list.first { it.dt_txt == dateId }
 
+    /**
+     * returns timezone offet by city
+     */
     override fun getTimeOffsetForCity(city: String) = cache.getValue(city).city.timezone
 }

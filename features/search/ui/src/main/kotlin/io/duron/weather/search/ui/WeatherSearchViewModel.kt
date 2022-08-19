@@ -30,6 +30,9 @@ class WeatherSearchViewModel @Inject constructor(
         combinePieces()
     }
 
+    /**
+     * Combines different flows to produce one view state flow
+     */
     private fun combinePieces() {
         combine(_loadingState, _textState, _errorState) { loading, text, error ->
             WeatherInput(error = error, loading = loading, text = text)
@@ -46,6 +49,11 @@ class WeatherSearchViewModel @Inject constructor(
         fetchCityWeather(city)
     }
 
+    /**
+     * make repository call to fetch weather by city
+     * if successful then navigate to hourly view,
+     * if fails then display error message
+     */
     private fun fetchCityWeather(city: String) {
         _loadingState.value = true
         viewModelScope.launch {
@@ -59,11 +67,12 @@ class WeatherSearchViewModel @Inject constructor(
         }
     }
 
+
     fun onTextUpdated(text: String) {
         _textState.value = text
     }
 
-    fun navigateToWeatherList(query: String) {
+    private fun navigateToWeatherList(query: String) {
         router.navigateToWeatherList(query)
     }
 

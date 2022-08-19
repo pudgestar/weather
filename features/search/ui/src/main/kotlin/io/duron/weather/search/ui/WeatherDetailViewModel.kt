@@ -19,6 +19,10 @@ class WeatherDetailViewModel @Inject constructor(
 
     lateinit var router: Router
 
+    /**
+     * sets city and time that were passed from navigation
+     * once set, we get the corresponding info from the repository to display
+     */
     fun setCityAndTime(city: String, dateId: String) {
         val point = weatherRepository.getHourlyInfo(city, dateId)
         val offset = weatherRepository.getTimeOffsetForCity(city)

@@ -49,8 +49,6 @@ class WeatherListViewModelTest {
 
     @Test
     fun `when city set, then state is emitted`() = runTest {
-
-
         viewModel.setQuery(CITY)
         viewModel.screenState.test {
             assertThat(awaitItem()).isEqualTo(

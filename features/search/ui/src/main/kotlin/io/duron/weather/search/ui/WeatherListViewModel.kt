@@ -24,6 +24,11 @@ class WeatherListViewModel @Inject constructor(
     private val _screenState = MutableStateFlow<WeatherListState>(WeatherListState(rows = emptyList()))
     val screenState: StateFlow<WeatherListState> = _screenState
 
+    /**
+     * sets the current city value that was passed from the navigation.
+     * the weather info for that city should live in cache in the repository
+     * once the value is passed, we retrieve that info and display it ui
+     */
     fun setQuery(city: String) {
         this.city = city
         viewModelScope.launch {
