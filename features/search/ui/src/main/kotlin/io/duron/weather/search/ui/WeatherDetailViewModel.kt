@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
+import io.duron.weather.search.domain.getLocalDateTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -19,13 +20,13 @@ class WeatherDetailViewModel @Inject constructor(
     lateinit var router: Router
 
     fun setCityAndTime(city: String, dateId: String) {
-        val point = weatherRepository.getHourlyInfo(city, dateId)
+        val (point, offset) = weatherRepository.getHourlyInfo(city, dateId)
         _detailState.value = WeatherDetailState.DetailContent(
             temp = point.main.temp.toInt().toString(),
             feelsLike = point.main.feels_like.toInt().toString(),
             summaryTitle = point.weather.first().main,
             summaryBody = point.weather.first().description,
-            time = point.date.toString("MM/dd HH:mm"),
+            time = point.getLocalDateTime(offset).toString("MM/dd HH:mm"),
             title = city
         )
     }

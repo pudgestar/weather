@@ -1,6 +1,7 @@
 package io.duron.weather.search.ui
 
 import io.duron.weather.search.domain.WeatherResponse
+import io.duron.weather.search.domain.getLocalDateTime
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -14,20 +15,20 @@ sealed class WeatherUiRow {
         val summary: String,
         val temp: String,
         val time: String,
-        val date: LocalDateTime,
+        val date: DateTime,
         val dateTxt: String
     ): WeatherUiRow()
 }
 
 fun WeatherResponse.toPointRows(): List<WeatherUiRow> {
+    val offset = this.city.timezone
     val pointRows =  this.list.map {
-        println("hit got time ${it.dt_txt} and temp ${it.main.temp.toInt()}")
-
+        val localDate = it.getLocalDateTime(offset)
         WeatherUiRow.WeatherPointRow(
             summary = it.weather.first().main,
             temp = it.main.temp.toInt().toString(),
-            time = it.date.toString("HH:mm"),
-            date = it.date,
+            time = localDate.toString("HH:mm"),
+            date = localDate,
             dateTxt = it.dt_txt
         )
     }
@@ -42,4 +43,4 @@ fun WeatherResponse.toPointRows(): List<WeatherUiRow> {
     return uiRows
 }
 
-private fun groupString(time: LocalDateTime) = "${time.monthOfYear}-${time.dayOfMonth}"
+private fun groupString(time: DateTime) = "${time.monthOfYear}-${time.dayOfMonth}"

@@ -1,16 +1,17 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
-    alias libs.plugins.hilt.plugin
     alias libs.plugins.kotlin.kapt
 }
 
 android {
-    compileSdk 32
+
+    compileSdk 33
 
     defaultConfig {
         minSdk 22
-        targetSdk 32
+        targetSdk 33
+
         vectorDrawables {
             useSupportLibrary true
         }
@@ -23,34 +24,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion "1.3.0"
-    }
+
 }
 
 
 dependencies {
-
     implementation libs.kotlin
-    implementation libs.compose.ui
-    implementation libs.compose.material
-    implementation libs.compose.ui.tooling.preview
-    implementation libs.lifecycle.runtime.ktx
-
-    implementation libs.android.hilt
-    implementation libs.android.hilt.compose
-    kapt libs.android.hilt.compiler
-
     implementation libs.joda.time
 
     implementation libs.moshi
     implementation libs.moshi.kotlin
     kapt libs.moshi.codegen
-
-    testImplementation libs.junit
-    debugImplementation libs.compose.ui.tooling
-    debugImplementation libs.ui.test.manifest
 }

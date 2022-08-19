@@ -6,7 +6,17 @@ plugins {
 }
 
 android {
-    compileSdk 32
+
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 22
+        targetSdk 33
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

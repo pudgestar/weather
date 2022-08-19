@@ -20,6 +20,10 @@ class WeatherRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getHourlyInfo(city: String, dateId: String) =
-        cache.getValue(city).list.first { it.dt_txt == dateId }
+    override fun getHourlyInfo(city: String, dateId: String): Pair<WeatherPoint, Int> {
+        val response = cache.getValue(city)
+        val offset = response.city.timezone
+        return response.list.first { it.dt_txt == dateId } to offset
+    }
+
 }

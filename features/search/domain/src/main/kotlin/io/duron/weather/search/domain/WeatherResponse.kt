@@ -1,6 +1,8 @@
 package io.duron.weather.search.domain
 
 import com.squareup.moshi.JsonClass
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import org.joda.time.LocalDateTime
 import org.joda.time.format.DateTimeFormat
 
@@ -19,11 +21,15 @@ data class WeatherPoint(
     val weather: List<Summary>,
     val dt_txt: String
 ) {
-    val date: LocalDateTime
-    get() = LocalDateTime.parse(dt_txt, DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss"))
+    val date: DateTime
+    get() {
+        return DateTime.parse(dt_txt, DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss").withZoneUTC())
+    }
 }
 
-@JsonClass(generateAdapter = true)
+fun WeatherPoint.getLocalDateTime(offset: Int): DateTime = date.plusSeconds(offset)
+
+    @JsonClass(generateAdapter = true)
 data class WeatherMain(
     val temp: Float,
     val feels_like: Float,
@@ -40,5 +46,5 @@ data class Summary(
 )
 
 data class City(
-    val timezone: Long
+    val timezone: Int
 )

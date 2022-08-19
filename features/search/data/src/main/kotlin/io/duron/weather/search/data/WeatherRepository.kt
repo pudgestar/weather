@@ -7,5 +7,5 @@ import javax.inject.Inject
 interface WeatherRepository {
     suspend fun getWeatherForCity(city: String): WeatherResponse
 
-    fun getHourlyInfo(city: String, dateId: String): WeatherPoint
+    fun getHourlyInfo(city: String, dateId: String): Pair<WeatherPoint, Int>
 }
