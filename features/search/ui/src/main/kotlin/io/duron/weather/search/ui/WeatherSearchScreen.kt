@@ -10,13 +10,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun WeatherSearchScreen(viewModel: WeatherSearchViewModel) {
     val input = viewModel.screenState.collectAsState().value
 
 
-    Box(modifier = Modifier.fillMaxSize(1f).background(MaterialTheme.colors.background)) {
+    Box(modifier = Modifier
+        .fillMaxSize(1f)
+        .background(MaterialTheme.colors.background)) {
         Column(
             modifier = Modifier.align(Alignment.Center),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -29,7 +32,7 @@ fun WeatherSearchScreen(viewModel: WeatherSearchViewModel) {
                 colors = TextFieldDefaults.textFieldColors(textColor = MaterialTheme.colors.onBackground),
             )
             if(input.error != null) {
-                Text(input.error, color = Color.Red)
+                Text(stringResource(input.error), color = Color.Red)
             }
             OutlinedButton(onClick = { viewModel.onLookupTapped(input.text) }, enabled = !input.loading) {
                 Text("Lookup")

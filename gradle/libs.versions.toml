@@ -18,6 +18,10 @@ moshi = "1.13.0"
 moshikotlin = "1.13.0"
 jodatime = "2.11.0"
 composesystemui = "0.26.1-alpha"
+mockk = "1.12.5"
+turbine = "0.9.0"
+assertj = "3.23.1"
+
 
 hilt = "2.42"
 
@@ -67,8 +71,14 @@ moshi_codegen = { module = 'com.squareup.moshi:moshi-kotlin-codegen', version.re
 moshi_kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshikotlin"}
 joda_time = { module = 'joda-time:joda-time', version.ref = "jodatime"}
 
+mockk = { module = "io.mockk:mockk", version.ref = "mockk"}
+turbine = { module = 'app.cash.turbine:turbine', version.ref = "turbine"}
+coroutines_test = { module = 'org.jetbrains.kotlinx:kotlinx-coroutines-test', version.ref = "coroutines"}
+assertj = { module  = 'org.assertj:assertj-core', version.ref = "assertj" }
+
 
 
 [bundles]
 compose = ["compose_activity", "compose_material", "compose-ui", "compose_ui_tooling_preview", "compose_system_ui", "compose_icons"]
+testing = [ "mockk", "turbine", "coroutines_test", "assertj", "junit"]
 

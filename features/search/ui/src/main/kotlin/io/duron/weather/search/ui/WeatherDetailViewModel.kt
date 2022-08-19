@@ -20,7 +20,8 @@ class WeatherDetailViewModel @Inject constructor(
     lateinit var router: Router
 
     fun setCityAndTime(city: String, dateId: String) {
-        val (point, offset) = weatherRepository.getHourlyInfo(city, dateId)
+        val point = weatherRepository.getHourlyInfo(city, dateId)
+        val offset = weatherRepository.getTimeOffsetForCity(city)
         _detailState.value = WeatherDetailState.DetailContent(
             temp = point.main.temp.toInt().toString(),
             feelsLike = point.main.feels_like.toInt().toString(),

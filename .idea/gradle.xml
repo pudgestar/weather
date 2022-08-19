@@ -13,11 +13,14 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/common/design" />
+            <option value="$PROJECT_DIR$/common/domain" />
             <option value="$PROJECT_DIR$/common/router" />
+            <option value="$PROJECT_DIR$/common/testing" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/search" />
             <option value="$PROJECT_DIR$/features/search/data" />
             <option value="$PROJECT_DIR$/features/search/domain" />
+            <option value="$PROJECT_DIR$/features/search/test" />
             <option value="$PROJECT_DIR$/features/search/ui" />
           </set>
         </option>

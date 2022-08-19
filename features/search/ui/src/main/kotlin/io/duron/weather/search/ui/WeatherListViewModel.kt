@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.duron.domain.RepositoryResult
 import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherListViewModel @Inject constructor(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
+    private val weatherUiUtil: WeatherUiUtil
 ) : ViewModel() {
 
     private lateinit var city: String
@@ -25,8 +27,15 @@ class WeatherListViewModel @Inject constructor(
     fun setQuery(city: String) {
         this.city = city
         viewModelScope.launch {
-            val response = weatherRepository.getWeatherForCity(city)
-            _screenState.emit(WeatherListState(title = city, rows = response.toPointRows()))
+
+            when( val result = weatherRepository.getWeatherForCity(city)) {
+                is RepositoryResult.Error -> throw IllegalStateException("Should never fail retrieving cached value")
+                is RepositoryResult.Success -> {
+                    val rows = weatherUiUtil.toPointRows(result.response)
+                    _screenState.emit(WeatherListState(title = city, rows = rows))
+                }
+            }
+
         }
     }
 

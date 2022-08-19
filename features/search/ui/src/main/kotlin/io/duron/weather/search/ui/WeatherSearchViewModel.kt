@@ -1,8 +1,10 @@
 package io.duron.weather.search.ui
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.duron.domain.RepositoryResult
 import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
 import kotlinx.coroutines.flow.*
@@ -19,7 +21,7 @@ class WeatherSearchViewModel @Inject constructor(
 
     private val _loadingState = MutableStateFlow(false)
     private val _textState = MutableStateFlow("")
-    private val _errorState = MutableStateFlow<String?>(null)
+    private val _errorState = MutableStateFlow<Int?>(null)
     private val _screenState = MutableStateFlow(WeatherInput())
 
     val screenState: StateFlow<WeatherInput> = _screenState
@@ -37,7 +39,7 @@ class WeatherSearchViewModel @Inject constructor(
     fun onLookupTapped(text: String) {
         val city = text.trim()
         if (city.isEmpty() || city.isBlank()) {
-            _errorState.value = "Invalid city input"
+            _errorState.value = R.string.error_city_input
             return
         }
         _errorState.value = null
@@ -47,14 +49,13 @@ class WeatherSearchViewModel @Inject constructor(
     private fun fetchCityWeather(city: String) {
         _loadingState.value = true
         viewModelScope.launch {
-            try {
-                searchRepository.getWeatherForCity(city.trim())
-                navigateToWeatherList(city)
-            } catch (e: Exception) {
-                _errorState.value = "Error fetching city"
+            when(searchRepository.getWeatherForCity(city.trim())) {
+                is RepositoryResult.Success -> navigateToWeatherList(city)
+                is RepositoryResult.Error -> {
+                    _errorState.value = R.string.error_fetching_city
+                }
             }
             _loadingState.value = false
-
         }
     }
 
@@ -69,7 +70,7 @@ class WeatherSearchViewModel @Inject constructor(
 }
 
 data class WeatherInput(
-    val error: String? = null,
+    @StringRes val error: Int? = null,
     val loading: Boolean = false,
     val text: String = ""
 )

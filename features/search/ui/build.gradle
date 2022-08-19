@@ -48,8 +48,11 @@ dependencies {
     implementation(project(":features:search:data"))
     implementation(project(":features:search:domain"))
     implementation(project(":common:router"))
+    implementation(project(":common:domain"))
 
-    testImplementation libs.junit
+    testImplementation libs.bundles.testing
+    testImplementation(project(":common:testing"))
+    testImplementation(project(":features:search:test"))
     debugImplementation libs.compose.ui.tooling
     debugImplementation libs.ui.test.manifest
 }

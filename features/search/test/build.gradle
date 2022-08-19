@@ -1,7 +1,6 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
-    alias libs.plugins.hilt.plugin
     alias libs.plugins.kotlin.kapt
 }
 
@@ -25,28 +24,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 
 dependencies {
-
     implementation libs.kotlin
-
-    implementation libs.coroutines
-    implementation project(":features:search:domain")
-    implementation project(":common:domain")
-
-    implementation libs.retrofit
+    implementation libs.joda.time
 
     implementation libs.moshi
     implementation libs.moshi.kotlin
     kapt libs.moshi.codegen
 
-    implementation libs.android.hilt
-    implementation libs.android.hilt.compose
-    kapt libs.android.hilt.compiler
-
-    testImplementation libs.bundles.testing
-    testImplementation project(":common:testing")
-    testImplementation(project(":features:search:test"))
+    implementation project(":features:search:domain")
 }

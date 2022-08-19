@@ -3,4 +3,6 @@
     <string name="feels_like">Feels Like: </string>
     <string name="farenheit_temp">%s&#8457;</string>
     <string name="time">Time: %s</string>
+    <string name="error_city_input">Invalid city input</string>
+    <string name="error_fetching_city">Error fetching city</string>
 </resources>
