@@ -5,16 +5,23 @@ import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
 import io.duron.weather.search.test.CITY
 import io.duron.weather.search.test.weatherResponse
+import io.duron.weather.testing.MainCoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class WeatherDetailViewModelTest {
+
+    @get:Rule
+    val coroutineRule = MainCoroutineRule()
 
     @MockK
     lateinit var repo: WeatherRepository

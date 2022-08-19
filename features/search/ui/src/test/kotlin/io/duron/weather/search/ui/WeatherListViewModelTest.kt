@@ -13,12 +13,14 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class WeatherListViewModelTest {
 
     @get:Rule
@@ -51,6 +53,7 @@ class WeatherListViewModelTest {
     fun `when city set, then state is emitted`() = runTest {
         viewModel.setQuery(CITY)
         viewModel.screenState.test {
+            awaitItem() // Drop first emission of default state
             assertThat(awaitItem()).isEqualTo(
                 WeatherListState(
                     title = CITY,
