@@ -5,6 +5,8 @@ import io.duron.domain.RepositoryResult
 import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
 import io.duron.weather.search.domain.*
+import io.duron.weather.search.test.CITY
+import io.duron.weather.search.test.weatherResponse
 import io.duron.weather.testing.MainCoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

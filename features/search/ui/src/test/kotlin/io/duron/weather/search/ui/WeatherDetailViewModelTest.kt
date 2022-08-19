@@ -3,6 +3,8 @@ package io.duron.weather.search.ui
 import app.cash.turbine.test
 import io.duron.weather.router.Router
 import io.duron.weather.search.data.WeatherRepository
+import io.duron.weather.search.test.CITY
+import io.duron.weather.search.test.weatherResponse
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
